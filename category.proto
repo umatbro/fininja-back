@@ -1,0 +1,12 @@
+syntax = 'proto3';
+
+service CategoriesService {
+    rpc getCategories(GetCategoriesParams) returns (stream Category) {}
+}
+
+message GetCategoriesParams {}
+
+message Category {
+    string name = 1;
+    repeated Category subcategories = 2;
+}
