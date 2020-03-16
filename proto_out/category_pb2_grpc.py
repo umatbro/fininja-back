@@ -4,7 +4,7 @@ import grpc
 import proto_out.category_pb2 as category__pb2
 
 
-class CategoriesServiceStub(object):
+class SpreadsheetServiceStub(object):
   # missing associated documentation comment in .proto file
   pass
 
@@ -15,13 +15,18 @@ class CategoriesServiceStub(object):
       channel: A grpc.Channel.
     """
     self.getCategories = channel.unary_stream(
-        '/CategoriesService/getCategories',
+        '/SpreadsheetService/getCategories',
         request_serializer=category__pb2.GetCategoriesParams.SerializeToString,
         response_deserializer=category__pb2.Category.FromString,
         )
+    self.putCostEntry = channel.unary_unary(
+        '/SpreadsheetService/putCostEntry',
+        request_serializer=category__pb2.CostEntryRequest.SerializeToString,
+        response_deserializer=category__pb2.CostEntryResponse.FromString,
+        )
 
 
-class CategoriesServiceServicer(object):
+class SpreadsheetServiceServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
@@ -32,15 +37,27 @@ class CategoriesServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def putCostEntry(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
 
-def add_CategoriesServiceServicer_to_server(servicer, server):
+
+def add_SpreadsheetServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'getCategories': grpc.unary_stream_rpc_method_handler(
           servicer.getCategories,
           request_deserializer=category__pb2.GetCategoriesParams.FromString,
           response_serializer=category__pb2.Category.SerializeToString,
       ),
+      'putCostEntry': grpc.unary_unary_rpc_method_handler(
+          servicer.putCostEntry,
+          request_deserializer=category__pb2.CostEntryRequest.FromString,
+          response_serializer=category__pb2.CostEntryResponse.SerializeToString,
+      ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'CategoriesService', rpc_method_handlers)
+      'SpreadsheetService', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

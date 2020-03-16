@@ -1,7 +1,10 @@
 syntax = 'proto3';
 
-service CategoriesService {
+import "google/protobuf/timestamp.proto";
+
+service SpreadsheetService {
     rpc getCategories(GetCategoriesParams) returns (stream Category) {}
+    rpc putCostEntry(CostEntryRequest) returns (CostEntryResponse) {}
 }
 
 message GetCategoriesParams {}
@@ -9,4 +12,19 @@ message GetCategoriesParams {}
 message Category {
     string name = 1;
     repeated Category subcategories = 2;
+}
+
+message CostEntry {
+    Category category = 1;
+    float amount = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+message CostEntryRequest {
+    CostEntry costEntry = 1;
+}
+
+message CostEntryResponse {
+    string message = 1;
+    bool errorOccurred = 2;
 }

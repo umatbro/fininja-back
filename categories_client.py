@@ -5,7 +5,7 @@ import proto_out.category_pb2
 
 def run():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = proto_out.category_pb2_grpc.CategoriesServiceStub(channel)
+    stub = proto_out.category_pb2_grpc.SpreadsheetServiceStub(channel)
     response = stub.getCategories(proto_out.category_pb2.GetCategoriesParams())
 
     for val in response:

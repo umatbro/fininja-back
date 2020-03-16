@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fininja-back"
+version = "0.1.0"
+description = ""
+authors = ["umatbro <umatbroo@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+gspread = "^3.3.0"
+oauth2client = "^4.1.3"
+pyyaml = "^5.3"
+inquirer = "^2.6.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4.1"
+grpcio = "^1.27.2"
+grpcio-tools = "^1.27.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

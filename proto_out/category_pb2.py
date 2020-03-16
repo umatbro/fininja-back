@@ -11,6 +11,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -18,8 +19,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x0e\x63\x61tegory.proto\"\x15\n\x13GetCategoriesParams\":\n\x08\x43\x61tegory\x12\x0c\n\x04name\x18\x01 \x01(\t\x12 \n\rsubcategories\x18\x02 \x03(\x0b\x32\t.Category2I\n\x11\x43\x61tegoriesService\x12\x34\n\rgetCategories\x12\x14.GetCategoriesParams\x1a\t.Category\"\x00\x30\x01\x62\x06proto3'
-)
+  serialized_pb=b'\n\x0e\x63\x61tegory.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x15\n\x13GetCategoriesParams\":\n\x08\x43\x61tegory\x12\x0c\n\x04name\x18\x01 \x01(\t\x12 \n\rsubcategories\x18\x02 \x03(\x0b\x32\t.Category\"g\n\tCostEntry\x12\x1b\n\x08\x63\x61tegory\x18\x01 \x01(\x0b\x32\t.Category\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x02\x12-\n\ttimestamp\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"1\n\x10\x43ostEntryRequest\x12\x1d\n\tcostEntry\x18\x01 \x01(\x0b\x32\n.CostEntry\";\n\x11\x43ostEntryResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x15\n\rerrorOccurred\x18\x02 \x01(\x08\x32\x83\x01\n\x12SpreadsheetService\x12\x34\n\rgetCategories\x12\x14.GetCategoriesParams\x1a\t.Category\"\x00\x30\x01\x12\x37\n\x0cputCostEntry\x12\x11.CostEntryRequest\x1a\x12.CostEntryResponse\"\x00\x62\x06proto3'
+  ,
+  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
 
 
@@ -43,8 +45,8 @@ _GETCATEGORIESPARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18,
-  serialized_end=39,
+  serialized_start=51,
+  serialized_end=72,
 )
 
 
@@ -81,13 +83,133 @@ _CATEGORY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=41,
-  serialized_end=99,
+  serialized_start=74,
+  serialized_end=132,
+)
+
+
+_COSTENTRY = _descriptor.Descriptor(
+  name='CostEntry',
+  full_name='CostEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='category', full_name='CostEntry.category', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='CostEntry.amount', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='CostEntry.timestamp', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=134,
+  serialized_end=237,
+)
+
+
+_COSTENTRYREQUEST = _descriptor.Descriptor(
+  name='CostEntryRequest',
+  full_name='CostEntryRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='costEntry', full_name='CostEntryRequest.costEntry', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=239,
+  serialized_end=288,
+)
+
+
+_COSTENTRYRESPONSE = _descriptor.Descriptor(
+  name='CostEntryResponse',
+  full_name='CostEntryResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='message', full_name='CostEntryResponse.message', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='errorOccurred', full_name='CostEntryResponse.errorOccurred', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=290,
+  serialized_end=349,
 )
 
 _CATEGORY.fields_by_name['subcategories'].message_type = _CATEGORY
+_COSTENTRY.fields_by_name['category'].message_type = _CATEGORY
+_COSTENTRY.fields_by_name['timestamp'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_COSTENTRYREQUEST.fields_by_name['costEntry'].message_type = _COSTENTRY
 DESCRIPTOR.message_types_by_name['GetCategoriesParams'] = _GETCATEGORIESPARAMS
 DESCRIPTOR.message_types_by_name['Category'] = _CATEGORY
+DESCRIPTOR.message_types_by_name['CostEntry'] = _COSTENTRY
+DESCRIPTOR.message_types_by_name['CostEntryRequest'] = _COSTENTRYREQUEST
+DESCRIPTOR.message_types_by_name['CostEntryResponse'] = _COSTENTRYRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCategoriesParams = _reflection.GeneratedProtocolMessageType('GetCategoriesParams', (_message.Message,), {
@@ -104,29 +226,59 @@ Category = _reflection.GeneratedProtocolMessageType('Category', (_message.Messag
   })
 _sym_db.RegisterMessage(Category)
 
+CostEntry = _reflection.GeneratedProtocolMessageType('CostEntry', (_message.Message,), {
+  'DESCRIPTOR' : _COSTENTRY,
+  '__module__' : 'category_pb2'
+  # @@protoc_insertion_point(class_scope:CostEntry)
+  })
+_sym_db.RegisterMessage(CostEntry)
+
+CostEntryRequest = _reflection.GeneratedProtocolMessageType('CostEntryRequest', (_message.Message,), {
+  'DESCRIPTOR' : _COSTENTRYREQUEST,
+  '__module__' : 'category_pb2'
+  # @@protoc_insertion_point(class_scope:CostEntryRequest)
+  })
+_sym_db.RegisterMessage(CostEntryRequest)
+
+CostEntryResponse = _reflection.GeneratedProtocolMessageType('CostEntryResponse', (_message.Message,), {
+  'DESCRIPTOR' : _COSTENTRYRESPONSE,
+  '__module__' : 'category_pb2'
+  # @@protoc_insertion_point(class_scope:CostEntryResponse)
+  })
+_sym_db.RegisterMessage(CostEntryResponse)
 
 
-_CATEGORIESSERVICE = _descriptor.ServiceDescriptor(
-  name='CategoriesService',
-  full_name='CategoriesService',
+
+_SPREADSHEETSERVICE = _descriptor.ServiceDescriptor(
+  name='SpreadsheetService',
+  full_name='SpreadsheetService',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=101,
-  serialized_end=174,
+  serialized_start=352,
+  serialized_end=483,
   methods=[
   _descriptor.MethodDescriptor(
     name='getCategories',
-    full_name='CategoriesService.getCategories',
+    full_name='SpreadsheetService.getCategories',
     index=0,
     containing_service=None,
     input_type=_GETCATEGORIESPARAMS,
     output_type=_CATEGORY,
     serialized_options=None,
   ),
+  _descriptor.MethodDescriptor(
+    name='putCostEntry',
+    full_name='SpreadsheetService.putCostEntry',
+    index=1,
+    containing_service=None,
+    input_type=_COSTENTRYREQUEST,
+    output_type=_COSTENTRYRESPONSE,
+    serialized_options=None,
+  ),
 ])
-_sym_db.RegisterServiceDescriptor(_CATEGORIESSERVICE)
+_sym_db.RegisterServiceDescriptor(_SPREADSHEETSERVICE)
 
-DESCRIPTOR.services_by_name['CategoriesService'] = _CATEGORIESSERVICE
+DESCRIPTOR.services_by_name['SpreadsheetService'] = _SPREADSHEETSERVICE
 
 # @@protoc_insertion_point(module_scope)
