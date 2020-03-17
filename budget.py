@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 
 """
-Add entry to spreadsheet
+Manage budget.
+
+Available commands:
+* add - add entry
+* show - open browser and show spreadsheet
+* today - show amount spent on a given day
 """
 
 import sys
 import argparse
+from argparse import RawTextHelpFormatter
 import datetime as dt
 
 import inquirer
@@ -14,16 +20,17 @@ from main import get_categories, save_cost_in_spreadsheet
 
 YEAR = 2020
 
-parser = argparse.ArgumentParser(description=__doc__)
+parser = argparse.ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
 
-parser.add_argument('value', type=float)
-parser.add_argument('--date', required=False, type=str, nargs='?', help='Date should be in format MM-DD')
+subparsers = parser.add_subparsers(dest='subparser')
 
-if __name__ == '__main__':
-    args = parser.parse_args()
-    datetime = dt.datetime.strptime(f'{YEAR}-'+args.date, '%Y-%m-%d') if args.date else dt.datetime.today()
+parser_add = subparsers.add_parser('add')
+parser_add.add_argument('value', type=float)
+parser_add.add_argument('-d', '--date', required=False, type=str, nargs='?', help='Date should be in format MM-DD', dest='date')
 
-    value = args.value
+
+def add(value, date):
+    datetime = dt.datetime.strptime(f'{YEAR}-{date}', '%Y-%m-%d') if date else dt.datetime.today()
 
     print('Downloading categories list...')
     categories = dict(get_categories())
@@ -54,7 +61,7 @@ if __name__ == '__main__':
     confirm_question = [
         inquirer.List(
             'confirm',
-            message=f'Are you sure? Add {args.value} zł to category "{selected_category.value} - {subcategory.value}"',
+            message=f'Are you sure? Add {value} zł to category "{selected_category.value} - {subcategory.value}"',
             choices=(confirm_msg, cancel_msg),
         ),
     ]
@@ -74,3 +81,13 @@ if __name__ == '__main__':
     if not current_cell:
         print('Error')
         sys.exit(1)
+
+
+if __name__ == '__main__':
+    kwargs = vars(parser.parse_args())
+    subparser = kwargs.pop('subparser')
+    if not subparser:
+        parser.print_help()
+        sys.exit(0)
+    else:
+        globals()[subparser](**kwargs)
