@@ -96,6 +96,11 @@ def put_cost_in_spreadsheet(value, category: Category, timestamp: Timestamp):
     date = dt.datetime.fromtimestamp(timestamp.seconds)
     category_name = category.name
     subcategory_name = category.subcategories[0].name
+
+    return save_cost_in_spreadsheet(value, category_name, subcategory_name, date)
+
+
+def save_cost_in_spreadsheet(value: float, category_name: str, subcategory_name: str, date: dt.datetime):
     worksheets = get_worksheets()
     curr_month_worksheet = next(filter(
         lambda worksheet: MONTHS_MAPPING[date.month] in worksheet.title.lower(),
@@ -105,9 +110,9 @@ def put_cost_in_spreadsheet(value, category: Category, timestamp: Timestamp):
         return
 
     categories_column = deque(curr_month_worksheet.range('B51:B251'))
-
     parent_category_encountered = False
     row_to_modify = None
+
     while categories_column:
         category_cell = categories_column.popleft()
         if category_cell.value == category_name:
