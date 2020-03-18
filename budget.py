@@ -13,10 +13,11 @@ import sys
 import argparse
 from argparse import RawTextHelpFormatter
 import datetime as dt
+import webbrowser
 
 import inquirer
 
-from main import get_categories, save_cost_in_spreadsheet
+from main import get_categories, save_cost_in_spreadsheet, get_worksheets, MONTHS_MAPPING, config
 
 YEAR = 2020
 
@@ -27,6 +28,9 @@ subparsers = parser.add_subparsers(dest='subparser')
 parser_add = subparsers.add_parser('add')
 parser_add.add_argument('value', type=float)
 parser_add.add_argument('-d', '--date', required=False, type=str, nargs='?', help='Date should be in format MM-DD', dest='date')
+
+parser_show = subparsers.add_parser('show')
+parser_show.add_argument(default=0, type=int, nargs='?', help='Number of the month of the tab to open', dest='month_number')
 
 
 def add(value, date):
@@ -81,6 +85,14 @@ def add(value, date):
     if not current_cell:
         print('Error')
         sys.exit(1)
+
+
+def show(month_number):
+    if not month_number:
+        month_number = dt.datetime.today().month
+    worksheets = get_worksheets()
+    selected_month_workwheet = next(filter(lambda ws: MONTHS_MAPPING[month_number] in ws.title.lower(), worksheets))
+    webbrowser.open(f'https://docs.google.com/spreadsheets/d/{config["spreadsheet_key"]}/edit#gid={selected_month_workwheet.id}')
 
 
 if __name__ == '__main__':
