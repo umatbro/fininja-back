@@ -1,3 +1,4 @@
+from pathlib import Path
 from decimal import Decimal
 from collections import deque
 import datetime as dt
@@ -10,12 +11,17 @@ from oauth2client.service_account import ServiceAccountCredentials
 from proto_out.category_pb2 import Category
 
 
+BASE_DIR = Path(__file__).resolve().parent
+SECRETS_FILE_PATH = BASE_DIR / 'secrets.yaml'
+
+
 EMPTY_CELL_VALUE = '.'
 CELL_RANGE = 'B14:B213'
-with open('secrets.yaml', 'r') as f:
+with open(SECRETS_FILE_PATH, 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 SPREADSHEET_KEY = config['spreadsheet_key']
-KEYFILE_PATH = config['keyfile_path']
+_config_keyfile_path = Path(config['keyfile_path'])
+KEYFILE_PATH = _config_keyfile_path if _config_keyfile_path.is_absolute() else BASE_DIR / _config_keyfile_path
 
 DATES_COLUMNS_START_COLUMN_NUMBER = 8
 
